@@ -149,7 +149,7 @@ def run_pip(command, desc=None, live=default_command_live):
         return
 
     index_url_line = f' --index-url {index_url}' if index_url != '' else ''
-    return run(f'"{python}" -m pip {command} --prefer-binary{index_url_line}', desc=f"Installing {desc}", errdesc=f"Couldn't install {desc}", live=live)
+    return run(f'"{python}" -m pip {command} -i https://simple.baidu.com/pypi/simple --prefer-binary{index_url_line}', desc=f"Installing {desc}", errdesc=f"Couldn't install {desc}", live=live)
 
 
 def check_run_python(code: str) -> bool:
@@ -422,7 +422,7 @@ def prepare_environment():
     print(f"Commit hash: {commit}")
 
     if args.reinstall_torch or not is_installed("torch") or not is_installed("torchvision"):
-        run(f'"{python}" -m {torch_command}', "Installing torch and torchvision", "Couldn't install torch", live=True)
+        run(f'"{python}" -m {torch_command} -i https://simple.baidu.com/pypi/simple', "Installing torch and torchvision", "Couldn't install torch", live=True)
         startup_timer.record("install torch")
 
     if args.use_ipex:
